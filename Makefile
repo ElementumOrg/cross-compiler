@@ -29,13 +29,12 @@ all:
 	done
 
 base:
-	$(DOCKER) build -t $(IMAGE):base .
+	$(DOCKER) build -t $(PROJECT)/$(IMAGE):base .
 
 $(PLATFORMS): base
-	$(DOCKER) build -t $(IMAGE):$@ -f docker/$@.Dockerfile docker
+	$(DOCKER) build -t $(PROJECT)/$(IMAGE):$@ -f docker/$@.Dockerfile docker
 
 push:
-	docker tag cross-compiler:$(PLATFORM) $(PROJECT)/cross-compiler:$(PLATFORM)
 	docker push $(PROJECT)/cross-compiler:$(PLATFORM)
 
 push-all:
@@ -45,7 +44,6 @@ push-all:
 
 pull:
 	docker pull $(PROJECT)/cross-compiler:$(PLATFORM)
-	docker tag $(PROJECT)/cross-compiler:$(PLATFORM) cross-compiler:$(PLATFORM)
 
 pull-all:
 	for i in $(PLATFORMS); do \
