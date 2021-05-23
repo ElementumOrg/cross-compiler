@@ -21,7 +21,7 @@ RUN curl -L https://github.com/tpoechtrager/osxcross/archive/master.tar.gz | tar
       https://storage.googleapis.com/obs-ci-cache/beats/MacOSX${MAC_SDK_VERSION}.sdk.tar.xz && \
     ln -s /usr/bin/clang-4.0 /usr/bin/clang && \
     ln -s /usr/bin/clang++-4.0 /usr/bin/clang++ && \
-    echo | SDK_VERSION=${MAC_SDK_VERSION} OSX_VERSION_MIN=10.14 UNATTENDED=1 ./build.sh && \
+    echo | SDK_VERSION=${MAC_SDK_VERSION} OSX_VERSION_MIN=10.9 UNATTENDED=1 ./build.sh && \
     ./build_gcc.sh && \
     mv /osxcross-master/target ${CROSS_ROOT} && \
     mkdir -p ${CROSS_ROOT}/lib && \
