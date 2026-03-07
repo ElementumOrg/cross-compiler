@@ -1,4 +1,4 @@
-cross-compiler [![Build Status](https://github.com/elementumorg/libtorrent-go/workflows/build/badge.svg)](https://github.com/elementumorg/libtorrent-go/actions?query=workflow%3Abuild)
+cross-compiler [![Build Status](https://github.com/elementumorg/cross-compiler/workflows/build/badge.svg)](https://github.com/elementumorg/cross-compiler/actions?query=workflow%3Abuild)
 
 ==============
 
