@@ -1,4 +1,5 @@
-cross-compiler [![Build Status](https://travis-ci.org/scakemyer/cross-compiler.svg?branch=master)](https://travis-ci.org/scakemyer/cross-compiler)
+cross-compiler [![Build Status](https://github.com/elementumorg/libtorrent-go/workflows/build/badge.svg)](https://github.com/elementumorg/libtorrent-go/actions?query=workflow%3Abuild)
+
 ==============
 
 C/C++ Cross compiling environment containers
@@ -18,7 +19,7 @@ Also adds CROSS_ROOT/bin in your PATH.
 
 ### Installed packages
 
-Based on Debian Jessie:
+Based on Debian Stretch:
 - bash
 - curl
 - wget
