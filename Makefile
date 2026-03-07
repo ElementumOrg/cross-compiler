@@ -12,7 +12,6 @@ PLATFORMS = \
 	android-x64 \
 	android-x86 \
 	darwin-x64 \
-	darwin-x86 \
 	linux-armv6 \
 	linux-armv7 \
 	linux-armv7_softfp \

@@ -18,7 +18,7 @@ jobs:
       matrix:
         platform: [
           android-arm, android-arm64, android-x64, android-x86, 
-          darwin-x64, darwin-x86, 
+          darwin-x64,
           linux-armv6, linux-armv7, linux-armv7_softfp, linux-arm64, linux-x64, linux-x86,
           windows-x64, windows-x86 ]
     steps:
@@ -31,7 +31,7 @@ jobs:
           make ${{ matrix.platform }}
 
       - name: Publish ${{ matrix.platform }} docker image
-        if: success() && github.event_name == 'create' && startsWith(github.ref, 'refs/tags/')
+        # if: success() && github.event_name == 'create' && startsWith(github.ref, 'refs/tags/')
         shell: bash
         run: |
           docker login -u="${{ secrets.DOCKER_USERNAME }}" -p="${{ secrets.DOCKER_PASSWORD }}"
