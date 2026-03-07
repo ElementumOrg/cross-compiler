@@ -15,9 +15,7 @@ RUN apt-get update && apt-get -y -f install \
     file \
     rsync \
     sed \
-    upx \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    upx 
 
 RUN wget "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz" \
     --no-check-certificate -qO- | tar --strip-components=1 -xz --one-top-level=/usr
