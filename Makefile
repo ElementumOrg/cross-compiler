@@ -11,6 +11,7 @@ PLATFORMS = \
 	android-arm64 \
 	android-x64 \
 	android-x86 \
+	darwin-arm64 \
 	darwin-x64 \
 	linux-armv6 \
 	linux-armv7 \
@@ -34,7 +35,7 @@ base:
 musl:
 	$(DOCKER) build -t $(PROJECT)/$(IMAGE):musl -f musl.Dockerfile .
 
-$(PLATFORMS): base musl
+$(PLATFORMS): base
 	$(DOCKER) build -t $(PROJECT)/$(IMAGE):$@ -f docker/$@.Dockerfile docker
 
 push:

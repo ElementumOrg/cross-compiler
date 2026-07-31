@@ -1,16 +1,22 @@
 FROM elementumorg/cross-compiler:base
 
-ENV CROSS_TRIPLE arm-linux-gnueabihf
-ENV CROSS_ROOT /usr/${CROSS_TRIPLE}
-ENV PATH ${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin
-ENV LD_LIBRARY_PATH ${CROSS_ROOT}/lib:${LD_LIBRARY_PATH}
-ENV PKG_CONFIG_PATH ${CROSS_ROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}
-ENV RASPBERRYPI_TOOLS_COMMIT master
+ENV CROSS_TRIPLE="arm-linux-gnueabihf"
+ENV CROSS_ROOT="/usr/${CROSS_TRIPLE}"
+ENV PATH="${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin"
+ENV LD_LIBRARY_PATH="${CROSS_ROOT}/lib:${LD_LIBRARY_PATH}"
+ENV PKG_CONFIG_PATH="${CROSS_ROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+ENV RASPBERRYPI_TOOLS_COMMIT="master"
 
 # Enable 32 bits binaries
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -y libc6-dev:i386 libstdc++6:i386 libgcc1:i386 zlib1g:i386
+    apt-get install -y --no-install-recommends \
+        libc6-dev:i386 \
+        libstdc++6:i386 \
+        libgcc1:i386 \
+        zlib1g:i386 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Raspberry Pi is ARMv6+VFP2, Debian armhf is ARMv7+VFP3
 # Since this Dockerfile is targeting linux-arm from Raspberry Pi onward,

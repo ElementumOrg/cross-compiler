@@ -1,14 +1,18 @@
 FROM elementumorg/cross-compiler:base
 
-ENV CROSS_TRIPLE x86_64-linux-android
-ENV CROSS_ROOT /usr/${CROSS_TRIPLE}
-ENV PATH ${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin
-ENV LD_LIBRARY_PATH ${CROSS_ROOT}/lib:${LD_LIBRARY_PATH}
-ENV PKG_CONFIG_PATH ${CROSS_ROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}
+ENV CROSS_TRIPLE="x86_64-linux-android"
+ENV CROSS_ROOT="/usr/${CROSS_TRIPLE}"
+ENV PATH="${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin"
+ENV LD_LIBRARY_PATH="${CROSS_ROOT}/lib:${LD_LIBRARY_PATH}"
+ENV PKG_CONFIG_PATH="${CROSS_ROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+ENV NDK="android-ndk-r20b"
 
-RUN apt-get update && apt-get install -y python zlib1g-dev libcurl4-openssl-dev
-
-ENV NDK android-ndk-r20b
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python \
+    zlib1g-dev \
+    libcurl4-openssl-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN set -ex && \
     mkdir -p /build && \
