@@ -1,6 +1,9 @@
 FROM elementumorg/cross-compiler:base
 
-RUN apt-get update && apt-get -y install crossbuild-essential-arm64
+RUN apt-get update && apt-get -y install --no-install-recommends \
+    crossbuild-essential-arm64 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV CROSS_TRIPLE="aarch64-linux-gnu"
 ENV CROSS_ROOT="/usr/${CROSS_TRIPLE}"

@@ -1,5 +1,8 @@
 FROM elementumorg/cross-compiler:base
 
+# Fail a RUN when any command in a pipe fails (e.g. a broken download piped into tar)
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ENV CROSS_TRIPLE="arm-linux-gnueabihf"
 ENV CROSS_ROOT="/usr/${CROSS_TRIPLE}"
 ENV PATH="${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin"

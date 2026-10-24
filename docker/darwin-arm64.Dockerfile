@@ -1,5 +1,8 @@
 FROM elementumorg/cross-compiler:base
 
+# Fail a RUN when any command in a pipe fails (e.g. a broken download piped into tar)
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ENV CROSS_ROOT="/usr/osxcross"
 ENV PATH="${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin"
 ENV LD_LIBRARY_PATH="${CROSS_ROOT}/lib"
@@ -28,10 +31,10 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# osxcross build needs cmake
+# CMAKE_VERSION is the CMake release the osxcross build needs
 ARG CMAKE_VERSION=3.20.3
 RUN wget "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz" \
-    --no-check-certificate -qO- | tar --strip-components=1 -xz --one-top-level=/usr
+    -qO- | tar --strip-components=1 -xz --one-top-level=/usr
 
 RUN curl -L https://github.com/tpoechtrager/osxcross/archive/master.tar.gz | tar xz && \
     cd /osxcross-master/ && \
