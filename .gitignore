@@ -23,3 +23,7 @@ _cgo_export.*
 _testmain.go
 
 *.exe
+
+# Python bytecode
+__pycache__/
+*.py[cod]
