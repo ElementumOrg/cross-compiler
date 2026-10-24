@@ -19,9 +19,8 @@ PLATFORMS = \
 	linux-x86 \
 	windows-x64 \
 	windows-x86 \
-	darwin-x64
-# TODO: darwin-arm64 still uses the old MacOS SDK, Golang >= 1.26 needs MacOS 13 SDK
-# 	darwin-arm64
+	darwin-x64 \
+	darwin-arm64
 
 .PHONY: $(PLATFORMS)
 
