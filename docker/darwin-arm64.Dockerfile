@@ -2,8 +2,8 @@ FROM elementumorg/cross-compiler:base
 
 ENV CROSS_ROOT="/usr/osxcross"
 ENV PATH="${PATH}:${CROSS_ROOT}/bin:${CROSS_ROOT}/go/bin"
-ENV LD_LIBRARY_PATH="/usr/lib/llvm-4.0/lib:${CROSS_ROOT}/lib:${LD_LIBRARY_PATH}"
-ENV PKG_CONFIG_PATH="${CROSS_ROOT}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+ENV LD_LIBRARY_PATH="${CROSS_ROOT}/lib"
+ENV PKG_CONFIG_PATH="${CROSS_ROOT}/lib/pkgconfig"
 # Go >= 1.26 needs a macOS 13 SDK and targets macOS 13.0
 ENV MAC_SDK_VERSION="13.3"
 ENV OSX_VERSION_MIN="13.0"
