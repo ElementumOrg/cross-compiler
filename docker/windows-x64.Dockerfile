@@ -1,7 +1,7 @@
 FROM elementumorg/cross-compiler:base
 
 RUN apt-get update && apt-get -y install --no-install-recommends \
-    mingw-w64 \
+    g++-mingw-w64-x86-64 \
     zlib1g-dev \
     libcurl4-openssl-dev \
     && apt-get clean \

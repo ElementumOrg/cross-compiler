@@ -11,8 +11,6 @@ PLATFORMS = \
 	android-arm64 \
 	android-x64 \
 	android-x86 \
-	darwin-arm64 \
-	darwin-x64 \
 	linux-armv6 \
 	linux-armv7 \
 	linux-armv7_softfp \
@@ -20,7 +18,10 @@ PLATFORMS = \
 	linux-x64 \
 	linux-x86 \
 	windows-x64 \
-	windows-x86
+	windows-x86 \
+	darwin-x64
+# TODO: darwin-arm64 still uses the old MacOS SDK, Golang >= 1.26 needs MacOS 13 SDK
+# 	darwin-arm64
 
 .PHONY: $(PLATFORMS)
 

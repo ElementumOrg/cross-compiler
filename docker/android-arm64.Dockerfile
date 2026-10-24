@@ -21,6 +21,7 @@ RUN set -ex && \
     unzip ${NDK}-linux-x86_64.zip 1>log 2>err && \
     cd ${NDK} && \
     ./build/tools/make_standalone_toolchain.py --arch=arm64 --api=21 --install-dir=${CROSS_ROOT} && \
+    find ${CROSS_ROOT} ${CROSS_ROOT}/sysroot/usr/lib -mindepth 1 -maxdepth 1 -type d -name '*-linux-android*' ! -name ${CROSS_TRIPLE} -exec rm -rf {} + && \
     cd / && rm -rf /build
 
 RUN cd ${CROSS_ROOT}/bin && \

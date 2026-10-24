@@ -24,6 +24,11 @@ RUN echo "deb http://apt.llvm.org/stretch/ llvm-toolchain-stretch-4.0 main" >> /
                                    libtool libxml2-dev uuid-dev libssl-dev bash \
                                    patch make tar xz-utils bzip2 gzip sed cpio git zlib1g-dev
 
+# osxcross build needs cmake
+ARG CMAKE_VERSION=3.20.3
+RUN wget "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz" \
+    --no-check-certificate -qO- | tar --strip-components=1 -xz --one-top-level=/usr
+
 RUN curl -L https://github.com/tpoechtrager/osxcross/archive/master.tar.gz | tar xz && \
     cd /osxcross-master/ && \
     curl -sSLo "tarballs/MacOSX${MAC_SDK_VERSION}.sdk.tar.xz" \

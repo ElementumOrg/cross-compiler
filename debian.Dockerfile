@@ -1,7 +1,9 @@
 ARG BASE_IMAGE=debian:bullseye
 FROM ${BASE_IMAGE}
 
-ARG CMAKE_VERSION=3.20.3
+# shortcut: bullseye is EOL and only on archive.debian.org; move to bookworm to drop this
+RUN sed -i 's#http://deb.debian.org#http://archive.debian.org#' /etc/apt/sources.list /etc/apt/sources.list.d/* 2>/dev/null; \
+    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99archive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https gnupg ca-certificates \
@@ -15,6 +17,3 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     upx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-RUN wget "https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.tar.gz" \
-    --no-check-certificate -qO- | tar --strip-components=1 -xz --one-top-level=/usr
