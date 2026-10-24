@@ -22,12 +22,13 @@ PLATFORMS = \
 	darwin-x64 \
 	darwin-arm64
 
-.PHONY: $(PLATFORMS)
+# Build platforms in parallel (override with `make JOBS=1 all`); each build's output is printed when it finishes
+JOBS ?= 4
+MAKEFLAGS += -j$(JOBS) --output-sync=target
 
-all:
-	for i in $(PLATFORMS); do \
-		$(MAKE) $$i; \
-	done
+.PHONY: all base $(PLATFORMS)
+
+all: $(PLATFORMS)
 
 base:
 	$(DOCKER) build -t $(PROJECT)/$(IMAGE):base -f debian.Dockerfile .
