@@ -23,7 +23,7 @@ jobs:
           windows-x64, windows-x86 ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Build ${{ matrix.platform }} docker image
         shell: bash
