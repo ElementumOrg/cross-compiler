@@ -19,7 +19,7 @@ Also adds CROSS_ROOT/bin in your PATH.
 
 ### Installed packages
 
-Based on Debian Stretch:
+Based on Debian Bullseye (installed from archive.debian.org, as Bullseye is EOL):
 - bash
 - curl
 - wget
@@ -45,28 +45,28 @@ And a selection of platform specific packages (see below).
 
 ### Platforms built
 
-- android-arm (android-ndk with android-19, toolchain 4.9)
-- android-arm64 (android-ndk with android-19, toolchain 4.9)
-- android-x64 (android-ndk with android-21, toolchain 4.9)
-- android-x86 (android-ndk with android-21, toolchain 4.9)
-- darwin-x64 (clang-3.9, llvm-3.9-dev, libtool, libxml2-dev, uuid-dev, libssl-dev patch make cpio)
-- linux-armv6 (gcc-7-arm-linux-gnueabihf)
-- linux-armv7 (gcc-7-arm-linux-gnueabihf)
-- linux-arm64 (aarch64-linux-gnu)
-- linux-x64
-- linux-x86 (gcc-multilib, g++-multilib)
-- windows-x64 (mingw-w64)
-- windows-x86 (mingw-w64)
+- android-arm, android-arm64, android-x64, android-x86 (Android NDK r20b standalone toolchain, clang, API 21 / Android 5.0+)
+- darwin-x64, darwin-arm64 ([osxcross](https://github.com/tpoechtrager/osxcross) with macOS SDK 13.3, clang-16, minimum macOS 13.0)
+- linux-armv6 (Raspberry Pi Linaro gcc toolchain, `arm-linux-gnueabihf`)
+- linux-armv7 (`crossbuild-essential-armhf`, gcc 10)
+- linux-armv7_softfp (`crossbuild-essential-armel`, gcc 10, `-mfloat-abi=softfp`)
+- linux-arm64 (`crossbuild-essential-arm64`, gcc 10)
+- linux-x64 (gcc 10)
+- linux-x86 (gcc 10 with `-m32`, gcc-multilib)
+- windows-x64 (mingw-w64 x86_64, gcc 10)
+- windows-x86 (mingw-w64 i686, gcc 10)
 
 ## Building
 
-Either build all images with:
+Either build all images (4 in parallel by default) with:
 
     make
 
+Use `make JOBS=1` to build one image at a time with full live output, or `make JOBS=8` for more parallel builds.
+
 Or selectively build platforms:
 
-    make darwin-x64
+    make darwin-arm64
 
 ## Release
 
